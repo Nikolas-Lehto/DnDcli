@@ -15,6 +15,8 @@ if [ $adv -ne $comp ] && [ $adv -ne $comp2 ];
 then
 	let "roll = $mod + 1 + $RANDOM % $dice"
 	echo "Result: " $roll
+	let "result = $roll - $mod"
+	echo "Roll: " $result
 fi
 if [ $adv -eq $comp ]
 then
