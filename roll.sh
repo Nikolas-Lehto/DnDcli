@@ -11,53 +11,64 @@ echo
 
 if [ -z $adv ];
 then
-	let "roll = $mod + 1 + $RANDOM % $dice"
+	roll=$(($mod+1+$RANDOM%$dice))
 	echo "Result: " $roll
-	let "result = $roll - $mod"
+	result=$(($roll-$mod))
 	echo
 	echo "Roll: " $result
+	echo
+	exit 0
 fi
 if [[ $adv == "-A" ]]
 then
-	let "roll1 = $mod + 1 + $RANDOM % $dice"
-	let "roll2 = $mod + 1 + $RANDOM % $dice"
+	roll1=$(($mod+1+$RANDOM%$dice))
+	roll2=$(($mod+1+$RANDOM%$dice))
 	if [ $roll1 -gt $roll2 ]
 	then
 		echo "Result: " $roll1
 		echo
-		let "result1 = $roll1 - $mod"
-		let "result2 = $roll2 - $mod"
+		result1=$(($roll1-$mod))
+		result2=$(($roll2-$mod))
 		echo "Rolls: " $result1 $result2
+		echo
+		exit 0
 	fi
 	if [ $roll2 -gt $roll1 ]
 	then
 		echo "Result: " $roll2
 		echo
-		let "result1 = $roll1 - $mod"
-		let "result2 = $roll2 - $mod"
+		result1=$(($roll1-$mod))
+		result2=$(($roll2-$mod))
 		echo "Rolls: " $result1 $result2
+		echo
+		exit 0
 	fi
 fi
 if [[ $adv == "-D" ]];
 then
-	let "roll1 = $mod + 1 + $RANDOM % $dice"
-	let "roll2 = $mod + 1 + $RANDOM % $dice"
+	roll1=$(($mod+1+$RANDOM%$dice))
+	roll2=$(($mod+1+$RANDOM%$dice))
 	if [ $roll1 -lt $roll2 ]
 	then
 		echo "Result: " $roll1
 		echo
-		let "result1 = $roll1 - $mod"
-		let "result2 = $roll2 - $mod"
+		result1=$(($roll1-$mod))
+		result2=$(($roll2-$mod))
 		echo "Rolls: " $result1 $result2
+		echo
+		exit 0
 	fi
 	if [ $roll2 -lt $roll1 ]
 	then
 		echo "Result: " $roll2
 		echo
-		let "result1 = $roll1 - $mod"
-		let "result2 = $roll2 - $mod"
+		result1=$(($roll1-$mod))
+		result2=$(($roll2-$mod))
 		echo "Rolls: " $result1 $result2
+		echo
+		exit 0
 	fi
 fi
 
+echo "Usage: roll <dice> <modifier> (-A dvantage | -D isadvantage)"
 echo
