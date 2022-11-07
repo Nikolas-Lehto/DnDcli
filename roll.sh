@@ -9,7 +9,7 @@ let "adv = $3"
 let "comp = 1"
 let "comp2 = 2"
 
-echo 
+echo
 
 if [ $adv -ne $comp ] && [ $adv -ne $comp2 ];
 then
