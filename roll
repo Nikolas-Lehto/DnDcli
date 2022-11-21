@@ -1,0 +1,55 @@
+#!/bin/bash
+
+#0 for none 1 for advantage 2 for disadvantage
+#anna tyhjien echojen olla. näyttää kivemmalta
+
+roll() {
+	dice=$1
+	adv=$2
+
+	echo
+
+	if [ -z $adv ];
+	then
+		roll=$((1+$RANDOM%$dice))
+		return $roll
+	fi
+	if [[ $adv == "-A" ]]
+	then
+		roll1=$((1+$RANDOM%$dice))
+		roll2=$((1+$RANDOM%$dice))
+		if [ $roll1 -gt $roll2 ]
+		then
+			return $roll1
+		fi
+		if [ $roll2 -gt $roll1 ]
+		then
+			return $roll2
+		fi
+	fi
+	if [[ $adv == "-D" ]];
+	then
+		roll1=$((1+$RANDOM%$dice))
+		roll2=$((1+$RANDOM%$dice))
+		if [ $roll1 -lt $roll2 ]
+		then
+			return $roll1
+		fi
+		if [ $roll2 -lt $roll1 ]
+		then
+			return $roll2
+		fi
+	fi
+}
+
+roll $1 $3
+
+if [[$1 -eq 20 && $? -eq 20]]
+	then
+	echo "Natural 20"
+	exit 0
+fi
+
+echo "Roll is: [ $? ]"
+
+echo "Result is:" $(($?+$2))
